@@ -21,7 +21,7 @@ sub getBranchHistory() {
 		chomp $history;
 		while ($history =~ m/([a-zA-Z0-9_.æøåÆØÅ\/-]+)/g) {
 			my $part = $1;
-			next if $part =~ m/^(?:\d+|tag|origin\/.+|-|HEAD|master)$/
+			next if $part =~ m/^(?:\d+|tag|origin\/.+|-|HEAD|master|main)$/
 				or $seen{$part}
 				or $part eq $HEAD;
 			$seen{$part} = 1;

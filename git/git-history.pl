@@ -19,9 +19,10 @@ sub getBranchHistory() {
 	my $HEAD = getHEAD();
 	foreach my $history (`git reflog --pretty="%D"`) {
 		chomp $history;
+		$history =~ s/tag: /tag\//g; # Make sure we can treat tags as single tokens
 		while ($history =~ m/([a-zA-Z0-9_.æøåÆØÅ\/-]+)/g) {
 			my $part = $1;
-			next if $part =~ m/^(?:\d+|tag|origin\/.+|-|HEAD|master|main)$/
+			next if $part =~ m/^(?:\d+|tag\/.+|origin\/.+|-|HEAD|master|main)$/
 				or $seen{$part}
 				or $part eq $HEAD;
 			$seen{$part} = 1;

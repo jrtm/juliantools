@@ -17,7 +17,7 @@ sub getBranchHistory() {
 	my @branches;
 	my %seen;
 	my $HEAD = getHEAD();
-	foreach my $history (`git reflog --pretty="%D"`) {
+	foreach my $history (`git reflog --no-show-signature --pretty="%D"`) {
 		chomp $history;
 		$history =~ s/tag: /tag\//g; # Make sure we can treat tags as single tokens
 		while ($history =~ m/([a-zA-Z0-9_.æøåÆØÅ\/-]+)/g) {
